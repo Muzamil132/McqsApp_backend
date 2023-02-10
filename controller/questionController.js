@@ -2,13 +2,15 @@
 import Question from "../models/QuestionModel.js"
 import { questionCategory } from "../utils/questionCategories.js"
 
+
+
 export const addQuestion=async(req,res)=>{
     console.log(req.body)
  try{
     //   await Question.deleteMany()
    
     const {question,options,answer,category} = req.body
-
+   
     
     const  quest = await Question.create({question,category,options,answer
 
@@ -41,17 +43,17 @@ export const getAllQuestionBYCategory=async(req,res)=>{
    
     try{
         const pageNumber = req.query.page?req.query.page:1
-        const pageSize=1
+        const pageSize=10
         const questions = await Question.find({category:category1}).limit(pageSize).skip(pageSize*(pageNumber - 1))
         const countofQuestions= await Question.countDocuments({category:category1})
-      
+        console.log(questions)
         if(!questions){
             res.status(400).json({message:"Error Happemd"})
         }
         res.status(200).json({questions,count: Math.ceil(countofQuestions/pageSize) })
 
     }catch(error){
-        console.log(error)
+        console.log(error.toString())
         res.status(503).json({message:"Error Happemd"})
 
     }
