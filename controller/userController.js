@@ -12,6 +12,7 @@ const authUser = async (req, res) => {
     const match = await bcrypt.compare(password.toString(),user?.password?.toString())
     if(match){
       res.status(200).json({
+        isAdmin:user.isAdmin,
         name:user.name,
         id:user._id,
         email:user.email,
@@ -44,6 +45,8 @@ const authUser = async (req, res) => {
   // @route   POST /api/users
   // @access  Public
   const registerUser = async (req, res) => {
+
+    
     
     const { name, email, password } = req.body
     try{
@@ -59,6 +62,7 @@ const authUser = async (req, res) => {
    
       if(user){
        return res.status(200).json({
+        isAdmin:user.isAdmin,
         name:user.name,
         id:user._id,
         email:user.email,
