@@ -1,14 +1,20 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
-const CategorySchema = mongoose.Schema(
+const SubCategorySchema = mongoose.Schema(
+
   {
+     Category:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Category"
+    },
     title: {
       type: String,
       required: true,
     },
 
   },
+  
   {
     timestamps: true,
   }
@@ -20,5 +26,5 @@ const CategorySchema = mongoose.Schema(
 
 
 
-const Category = mongoose.model('Category', CategorySchema)
-export default Category
+const SubCategory = mongoose.model('SubCategory', SubCategorySchema)
+export default SubCategory
