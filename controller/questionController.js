@@ -155,7 +155,7 @@ export const deleteQuestion=async(req,res)=>{
         const pageSize=10
         try{
             const questions = await Question.find({user:id.toString()}).limit(pageSize).skip(pageSize*(pageNumber - 1)).sort({createdAt: 'descending'})
-            const countofQuestions= await Question.countDocuments({category:category1})
+            const countofQuestions= await Question.countDocuments({user:id})
             if(questions){
                
                 res.status(200).json({success:true,questions,count: Math.ceil(countofQuestions/pageSize)})
