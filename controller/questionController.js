@@ -52,6 +52,7 @@ export const getAllQuestionBYCategory=async(req,res)=>{
         if(!questions){
             res.status(400).json({message:"Error Happemd"})
         }
+        
         res.status(200).json({questions,count: Math.ceil(countofQuestions/pageSize) })
 
     }catch(error){
@@ -150,12 +151,14 @@ export const deleteQuestion=async(req,res)=>{
 
     export const loadMyQuestions=async(req,res)=>{
         const {id} = req.params
-        console.log(id)
+        const pageNumber = req.query.page?req.query.page:1
+        const pageSize=10
         try{
-            const questions = await Question.find({user:id.toString()}).sort({createdAt: 'descending'})
+            const questions = await Question.find({user:id.toString()}).limit(pageSize).skip(pageSize*(pageNumber - 1)).sort({createdAt: 'descending'})
+            const countofQuestions= await Question.countDocuments({category:category1})
             if(questions){
                
-                res.status(200).json({success:true,questions})
+                res.status(200).json({success:true,questions,count: Math.ceil(countofQuestions/pageSize)})
             }else{
                 res.status(403).json({success:false})
             }
