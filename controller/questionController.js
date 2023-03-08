@@ -7,13 +7,13 @@ import { questionCategory } from "../utils/questionCategories.js"
 export const addQuestion=async(req,res)=>{
 
    
-   const {question,options,answer,category,isAdmin,userId}=req.body
+   const {question,options,answer,category,isAdmin,userId,subcategory}=req.body
    console.log(req.body)
    console.log(isAdmin,"what is that")
  try{
      
 
-    const  quest = await Question.create({question,category,options,answer,enabled:isAdmin?true:false,user:userId,
+    const  quest = await Question.create({question,category,subcategory,options,answer,enabled:isAdmin?true:false,user:userId,
         createdBy:isAdmin?"admin":"user"
 
     })

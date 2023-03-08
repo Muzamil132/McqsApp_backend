@@ -17,8 +17,12 @@ const QuestionSchema = mongoose.Schema(
       required: true,
     },
     category: {
-        type: String,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Category"
+      },
+      subcategory: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"SubCategory"
       },
     createdBy: {
       type: String,
