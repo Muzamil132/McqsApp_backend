@@ -39,3 +39,20 @@ export const getAllSubCategoriesofOneCategory =async(req,res)=>{
 
 
 }
+
+export const deleteSubCategory = async(req, res) => {
+    const {id} = req.params
+
+  try {
+    const category = await SubCategory.findOneAndDelete({ _id: id.toString() });
+    if (category) {
+      res.status(200).json({ success: true });
+    } else {
+      res.status(403).json({ success: false });
+    }
+  }catch(error) {
+
+    res.status(503).json({ success: false, message: error.toString()});
+    
+  }
+};
