@@ -37,17 +37,17 @@ export const addQuestion=async(req,res)=>{
 
 
 export const getAllQuestionBYCategory=async(req,res)=>{
-    console.log("this is called from which of following manues")
-    const {cate}= req.query 
-    const category1 = questionCategory[cate]
-    console.log(cate,category1)
+   
+    const {id}= req.params
+  
+   
     
    
     try{
         const pageNumber = req.query.page?req.query.page:1
         const pageSize=10
-        const questions = await Question.find({category:category1,enabled:true}).limit(pageSize).skip(pageSize*(pageNumber - 1)).sort({createdAt: 'descending'})
-        const countofQuestions= await Question.countDocuments({category:category1})
+        const questions = await Question.find({subcategory:id,enabled:true}).limit(pageSize).skip(pageSize*(pageNumber - 1)).sort({createdAt: 'descending'})
+        const countofQuestions= await Question.countDocuments({subcategory:id})
         console.log(questions)
         if(!questions){
             res.status(400).json({message:"Error Happemd"})

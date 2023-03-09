@@ -6,7 +6,7 @@ import { protect } from "../middlewares/authmiddleware.js"
 const router = express.Router()
 
 router.post("/add",addQuestion)
-router.get("/all",getAllQuestionBYCategory)
+router.get("/all/:id",getAllQuestionBYCategory)
 router.get("/admin/:id",enableQuestion)
 router.delete("/admin/:id",deleteQuestion)
 router.get("/admin",getAlldisabledQuestions)
